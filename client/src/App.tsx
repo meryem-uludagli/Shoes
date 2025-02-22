@@ -3,9 +3,12 @@ import Login from "./pages/login";
 import Main from "./pages/main";
 import Register from "./pages/register";
 import Layout from "./components/layout";
+import useUser from "./hooks/useUser";
 
 const Protected = ({ children }: { children: React.ReactNode }) => {
-  return true ? <> {children}</> : <Navigate to="/login" />;
+  const { isAuthenticated } = useUser();
+
+  return isAuthenticated ? <> {children}</> : <Navigate to="/login" />;
 };
 const App = () => {
   return (
