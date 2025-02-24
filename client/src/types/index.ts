@@ -26,3 +26,23 @@ export interface AuthResponse {
   accessToken: string;
   user: User;
 }
+
+export interface Shoe {
+  _id: string;
+  name: string;
+  picture: string[];
+  description: string;
+  isNew?: boolean;
+  discount: number;
+  size: string;
+  color: string;
+  gender: "men" | "women";
+  price: number;
+  createdAt: string;
+  updatedAt: string;
+}
+
+export type ShoeData = Omit<
+  Shoe,
+  "_id" | "picture" | "createdAt" | "updatedAt"
+>;
