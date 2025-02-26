@@ -1,22 +1,21 @@
 import { FC } from "react";
 import { useParams } from "react-router-dom";
-import { useShoes } from "../../hooks/useShoes";
+useShose;
 import Loader from "../../components/loader";
 import Error from "../../components/error";
-import Images from "../../components/detail-page/images";
 import Head from "../../components/detail-page/head";
 import Color from "../../components/detail-page/color";
 import Size from "../../components/detail-page/size";
 import Foot from "../../components/detail-page/foot";
+import Images from "../../components/detail-page/images";
+import { useShose } from "../../hooks/useShoes";
 
 const Detail: FC = () => {
   const { id } = useParams<{ id: string }>();
-  const { shoe } = useShoes();
-
+  const { shoe } = useShose();
   const shoeQuery = shoe(id!);
 
   if (shoeQuery.isLoading) return <Loader />;
-
   if (shoeQuery.isError)
     return (
       <Error message={shoeQuery.error.message} refetch={shoeQuery.refetch} />
