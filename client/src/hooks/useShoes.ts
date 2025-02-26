@@ -1,8 +1,10 @@
-import { useMutation, useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { shoesApi } from "../services/api";
 import { ShoeData } from "../types";
-import { data } from "react-router-dom";
-export function useShose() {
+
+export function useShoes() {
+  const queryClient = useQueryClient();
+
   const shoes = useQuery({
     queryKey: ["shoes"],
     queryFn: () => shoesApi.getAll().then((res) => res.data),
@@ -14,29 +16,30 @@ export function useShose() {
       queryFn: () => shoesApi.getById(id).then((res) => res.data),
     });
 
-  const create = (data: ShoeData) =>
-    useMutation({
-      mutationFn: () => shoesApi.create(data),
-      onSuccess: () => {
-        alert("olusturuldu");
-      },
-    });
+  const create = useMutation({
+    mutationFn: (data: ShoeData) => shoesApi.create(data),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["shoes"] });
+      alert("Oluşturuldu");
+    },
+  });
 
-  const edit = (id: string, data: ShoeData) =>
-    useMutation({
-      mutationFn: () => shoesApi.edit(id, data),
-      onSuccess: () => {
-        alert("Duzenlendi");
-      },
-    });
+  const edit = useMutation({
+    mutationFn: ({ id, data }: { id: string; data: ShoeData }) =>
+      shoesApi.edit(id, data),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["shoes"] });
+      alert("Düzenlendi");
+    },
+  });
 
-  const remove = (id: string, data: ShoeData) =>
-    useMutation({
-      mutationFn: () => shoesApi.delete(id),
-      onSuccess: () => {
-        alert("Duzenlendi");
-      },
-    });
+  const remove = useMutation({
+    mutationFn: (id: string) => shoesApi.delete(id),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["shoes"] });
+      alert("Kaldırıldı");
+    },
+  });
 
-  return { shoes, shoe, create };
+  return { shoes, shoe, create, edit, remove };
 }

@@ -2,11 +2,11 @@ import { FC } from "react";
 import Form from "../../components/form";
 import { ShoeData } from "../../types";
 import { useNavigate } from "react-router-dom";
-import { useShose } from "../../hooks/useShoes";
+import { useShoes } from "../../hooks/useShoes";
 
 const Create: FC = () => {
   const navigate = useNavigate();
-  const { create } = useShose();
+  const { create } = useShoes();
 
   const handleAction = (data: ShoeData) => {
     create.mutate(data);

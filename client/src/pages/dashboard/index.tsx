@@ -1,10 +1,10 @@
 import { Link } from "react-router-dom";
 import Error from "../../components/error";
 import Loader from "../../components/loader";
-import { useShose } from "../../hooks/useShoes";
+import { useShoes } from "../../hooks/useShoes";
 
 const Dashboard = () => {
-  const { shoes, remove } = useShose();
+  const { shoes, remove } = useShoes();
 
   if (shoes.isLoading) return <Loader />;
 

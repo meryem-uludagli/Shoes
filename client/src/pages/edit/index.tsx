@@ -3,12 +3,12 @@ import Form from "../../components/form";
 import { useNavigate, useParams } from "react-router-dom";
 import { ShoeData } from "../../types";
 import Loader from "../../components/loader";
-import { useShose } from "../../hooks/useShoes";
+import { useShoes } from "../../hooks/useShoes";
 
 const Edit: FC = () => {
   const navigate = useNavigate();
   const { id } = useParams<{ id: string }>();
-  const { shoe, edit } = useShose();
+  const { shoe, edit } = useShoes();
 
   const { isLoading, data } = shoe(id as string);
 

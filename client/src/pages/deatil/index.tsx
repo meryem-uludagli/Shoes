@@ -1,6 +1,5 @@
 import { FC } from "react";
 import { useParams } from "react-router-dom";
-useShose;
 import Loader from "../../components/loader";
 import Error from "../../components/error";
 import Head from "../../components/detail-page/head";
@@ -8,11 +7,11 @@ import Color from "../../components/detail-page/color";
 import Size from "../../components/detail-page/size";
 import Foot from "../../components/detail-page/foot";
 import Images from "../../components/detail-page/images";
-import { useShose } from "../../hooks/useShoes";
+import { useShoes } from "../../hooks/useShoes";
 
 const Detail: FC = () => {
   const { id } = useParams<{ id: string }>();
-  const { shoe } = useShose();
+  const { shoe } = useShoes();
   const shoeQuery = shoe(id!);
 
   if (shoeQuery.isLoading) return <Loader />;
