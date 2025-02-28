@@ -1,5 +1,4 @@
-import { FC } from "react";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import Login from "./pages/login";
 import Register from "./pages/register";
 import Main from "./pages/main";
@@ -9,7 +8,7 @@ import Protected from "./components/protected";
 import Create from "./pages/create";
 import Edit from "./pages/edit";
 
-const App: FC = () => {
+const App = () => {
   return (
     <BrowserRouter>
       <Routes>
@@ -21,10 +20,10 @@ const App: FC = () => {
           <Route path="/shoe/:id" element={<Detail />} />
         </Route>
 
-        <Route path="admin" element={<Protected allowedRole="admin" />}>
+        <Route path="/admin" element={<Protected allowedRole="admin" />}>
           <Route index element={<Dashboard />} />
           <Route path="create" element={<Create />} />
-          <Route path="/edit/:id" element={<Edit />} />
+          <Route path="edit/:id" element={<Edit />} />
         </Route>
       </Routes>
     </BrowserRouter>

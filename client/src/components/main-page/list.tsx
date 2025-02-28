@@ -2,10 +2,10 @@ import { FC } from "react";
 import Loader from "../loader";
 import Error from "../error";
 import Card from "../card";
-import { useShose } from "../../hooks/useShoes";
+import { useShoes } from "../../hooks/useShoes";
 
 const List: FC = () => {
-  const { shoes } = useShose();
+  const { shoes } = useShoes();
 
   if (shoes.isLoading) return <Loader />;
 
